@@ -1,3 +1,5 @@
+import { Analytics } from "@/components/analytics";
+import { SettingsCompany } from "@/components/SettingsCompany";
 import { Roles } from "@/enums/role.enum";
 import AuthGuard from "@/guards/AuthGuard";
 import RoleGuard from "@/guards/RoleGuard";
@@ -36,6 +38,26 @@ const routes = createBrowserRouter([
           <AuthGuard>
             <RoleGuard allowedRoles={[Roles.EMPLOYE]}>
               <h1>Solo empleados</h1>
+            </RoleGuard>
+          </AuthGuard>
+        ),
+      },
+      {
+        path: "/setting",
+        element: (
+          <AuthGuard>
+            <RoleGuard allowedRoles={[Roles.ADMIN, Roles.EMPLOYE]}>
+              <SettingsCompany />
+            </RoleGuard>
+          </AuthGuard>
+        ),
+      },
+      {
+        path: "/analytics",
+        element: (
+          <AuthGuard>
+            <RoleGuard allowedRoles={[Roles.ADMIN, Roles.EMPLOYE]}>
+              <Analytics />
             </RoleGuard>
           </AuthGuard>
         ),
